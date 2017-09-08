@@ -7,6 +7,11 @@ const app = express()
 
 app.set('port', process.env.PORT || 3001)
 app.use(parser.json())
+app.use(express.static('client/build'))
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/client/build/index.html')
+})
 
 app.get('/api/translations', (req, res) => {
   Translation.find()
